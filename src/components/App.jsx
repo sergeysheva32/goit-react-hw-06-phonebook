@@ -1,18 +1,29 @@
-import ContactForm from './ContactForm/ContactForm';
-import ContactList  from './ContactList/ContactList';
-import Filter from './Filter/Filter';
-import { Container, Title, Heading2 } from './App.styled';
+import { Wrapper } from './Wrapper';
+import { GlobalStyle } from './GlobalStyle';
 
-function App() {
+import { Section } from './Section';
+import { ContactForm } from './ContactForm/ContactForm.jsx';
+import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter';
+
+import { useSelector } from 'react-redux';
+import { getContacts } from '../redux/selectors';
+
+export const App = () => {
+  const contacts = useSelector(getContacts);
+
   return (
-    <Container>
-      <Title>Phonebook📱</Title>
-      <ContactForm />
-      <Heading2>Contacts</Heading2>
-      <Filter />
-      <ContactList />
-    </Container>
-  );
-}
+    <Wrapper>
+      <Section title="Add contact">
+        <ContactForm />
+      </Section>
+      {contacts.length > 0 && (
+        <Section title="Contacts" headerContent={<Filter />}>
+          <ContactList />
+        </Section>
+      )}
 
-export default App;
+      <GlobalStyle />
+    </Wrapper>
+  );
+};

@@ -3,38 +3,75 @@ import styled from 'styled-components';
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  padding: 20px 20px 0;
+`;
+
+export const LabelContainer = styled.div`
+  position: relative;
+`;
+
+export const Label = styled.label`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  padding: 0 5px;
+
+  opacity: 0.8;
+  pointer-events: none;
+
+  transition: all ${({ theme }) => theme.transitions.slower};
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+
   margin-bottom: 20px;
 `;
 
 export const Input = styled.input`
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 6px;
+  padding: 8px;
+
+  background: ${({ theme }) => theme.colors.transparent};
+  border: 2px solid ${({ theme }) => theme.colors.accentSecondary};
+  border-radius: 5px;
+
+  :focus {
+    outline: 1px solid ${({ theme }) => theme.colors.accentPrimary};
+  }
+
+  :focus ~ label,
+  :not(:placeholder-shown) ~ label {
+    top: -8px;
+
+    font-size: 12px;
+    background-color: ${({ theme }) => theme.colors.white};
+    opacity: 1;
+  }
+`;
+
+export const Button = styled.button.attrs({ type: 'submit' })`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 10px 30px;
+  margin-bottom: 20px;
+
+  color: ${({ theme }) => theme.colors.white};
   border: none;
-  outline: 0;
-  background-color: #fff;
-  box-shadow: 0 1px 6px 0 #20212447;
-`;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.accentPrimary};
+  cursor: pointer;
 
-export const Button = styled.button`
-  > svg {
-    width: 40px;
-    height: 30px;
-  }
-  /* padding: 10px 20px; */
-  margin-top: 5px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid;
-  :hover {
-    background-color: #e0e0e0;
-    > svg {
-      fill: #00b02f;
-    }
-  }
-`;
+  transition: background-color ${({ theme }) => theme.transitions.slower};
 
-export const Text = styled.p`
-  /* padding: 10px 20px; */
-  margin-bottom: 15px;
+  :hover,
+  :focus {
+    background-color: ${({ theme }) => theme.colors.accentHover};
+  }
 `;
